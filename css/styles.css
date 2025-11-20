@@ -1,0 +1,64 @@
+html,
+body {
+  font-family: "Milonga", serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+header{
+  background-color: blue;
+  color: aliceblue;
+  height: 5%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 20px;
+}
+
+header h2{
+    animation: scroll-left 20s linear infinite;
+}
+
+nav {
+  background-color: brown;
+  color: antiquewhite;
+  height: 10%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#login {
+  background-color: coral;
+  color: black;
+  height: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+footer {
+  background-color: blueviolet;
+  color: aliceblue;
+  height: 10%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
