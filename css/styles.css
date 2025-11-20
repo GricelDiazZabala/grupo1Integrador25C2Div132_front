@@ -44,6 +44,16 @@ nav {
   justify-content: space-evenly;
 }
 
+#login input {
+  margin-bottom: 20px;
+  padding: 8px;
+}
+
+#login label {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
 footer {
   background-color: blueviolet;
   color: aliceblue;
@@ -62,3 +72,4 @@ footer {
     transform: translateX(-100%);
   }
 }
+
