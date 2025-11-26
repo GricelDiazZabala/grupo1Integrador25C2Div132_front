@@ -3,54 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="../grupo1Integrador25C2Div132_front/css/styles.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Milonga&display=swap"
-      rel="stylesheet"
-    />
-    <script src="../grupo1Integrador25C2Div132_front/js/main.js" defer></script>
-    <link rel="icon" type="image/png" href="https://w7.pngwing.com/pngs/409/950/png-transparent-mate-computer-icons-bigmidin-miscellaneous-orange-mate-thumbnail.png">
-    <title>Tienda de mates</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/mateIcon.png">
+    <script src="js/main.js" defer></script>
+    <title>Tienda de Mates</title>
   </head>
   <body>
-    <header>
-      <h2>
-        Tienda de mates y termos | Súper precios, amigos del bolsillo |
-        Aprovechá las ofertas
-      </h2>
+    
+    <header class="cabecera">
+      <div class="marca">
+        <h1>Termos y mates</h1>
+        <p>¡ARMA TU PEDIDO!</p>
+      </div>
+      
       <nav>
-        <ul>
-          <a href="index.html">
-            <li>Ver</li>
-          </a>
-          <a href="consultar.html">
-            <li>Consultar id</li>
-          </a>
-          <a href="crear.html">
-            <li>Crear</li>
-          </a>
-          <a href="modificar.html">
-            <li>Modificar</li>
-          </a>
-          <a href="eliminar.html">
-            <li>Eliminar</li>
-          </a>
-        </ul>
-        <label for="barraBusqueda"> Buscar... </label>
-        <input id="barraBusqueda" type="text" />
-        <p id="contadorProductos"></p>
+        <input id="barraBusqueda" type="text" placeholder="Buscar producto..." />
       </nav>
     </header>
+
     <main>
-      <h1>Lista de productos</h1>
-      <hr />
-      <div id="contenedorProductos"></div>
-      <aside id="contenedorCarrito"></aside>
+      <section class="contenedorProductos">
+        <h2>LISTA DE PRODUCTOS</h2>
+      </section>
+
+      <div id="contenedorProductos" class="grillaProductos"></div>
     </main>
-    <footer><h3>Gricel Diaz Zabala & Emiliano García</h3></footer>
-    <script></script>
+
+    <footer class="barraAbajo">
+      <div class="carrito">
+        <span>TU ORDEN:</span>
+        <span id="resumenCarritoTexto">0 ítems</span>
+      </div>
+      <div class="precioTotal">
+        Total: <span id="precioTotal">$0.00</span>
+      </div>
+      <button class="btn-pagar" onclick="mostrarCarrito()">VER CARRITO / PAGAR</button>
+    </footer>
+
+    <div id="contenedorCarrito" class="carritoEscondido">
+        </div>
+
   </body>
 </html>

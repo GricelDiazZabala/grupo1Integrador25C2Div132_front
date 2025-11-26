@@ -3,27 +3,26 @@ const API_BASE_URL = "http://localhost:3306/api/productos";
 let contenedorProductos = document.querySelector("#contenedorProductos");
 let contenedorCarrito = document.querySelector("#contenedorCarrito");
 let barraBusqueda = document.querySelector("#barraBusqueda");
-let nav = document.querySelector("nav");
+let resumenCarritoTexto = document.querySelector("#resumenCarritoTexto");
+let totalPrecioTexto = document.querySelector("#precioTotal");
+
 let termosYmates = [];
 let carrito = [];
+
 
 async function obtenerProductos() {
   try {
     const respuesta = await fetch(API_BASE_URL);
-   
-    const productos = await respuesta.json();
-
-    console.log("Datos de los productos API:", productos);
-    if(!productos){
-      termosYmates = [];
-    }
-    termosYmates = productos.payload
-
+    if (!respuesta.ok) throw new Error("API no disponible");
+    
+    const data = await respuesta.json();
+    termosYmates = data.payload || []; 
     return termosYmates;
 
   } catch (error) {
-    console.error("Hubo un error al obtener los productos:", error);
-    return [];
+    console.warn("No hay datos para mostrar", error);
+
+    return termosYmates;
   }
 }
 
@@ -35,84 +34,91 @@ function cargarCarritoLocalStorage() {
   const carritoGuardado = localStorage.getItem("carritoProductos");
   if (carritoGuardado) {
     carrito = JSON.parse(carritoGuardado);
+    actualizarBarraInferior();
   }
 }
 
 function mostrarProductos(array) {
   let cartaProducto = "";
   array.forEach((prod) => {
+    const imagen = prod.img_producto || "https://cdn-icons-png.flaticon.com/512/3050/3050253.png"; 
+    
     cartaProducto += `
             <div class="card-producto">
-                <img src="${prod.img_producto || "img/placeholder.png"}" alt="${prod.nombre_producto}" />
+                <img src="${imagen}" alt="${prod.nombre_producto}" />
                 <h3>${prod.nombre_producto}</h3>
                 <p>$ ${prod.precio_producto}</p>
-                <button class="botonAgregar" onclick="agregarACarrito(${prod.id})">Agregar a carrito</button>
+                <button class="botonAgregar" onclick="agregarACarrito(${prod.id})">AGREGAR +</button>
             </div> `;
   });
   contenedorProductos.innerHTML = cartaProducto;
 }
 
-barraBusqueda.addEventListener("keyup", () => {
-    filtrarProductos();
+barraBusqueda.addEventListener("keyup", (e) => {
+    const termino = e.target.value.toLowerCase();
+    const filtrados = termosYmates.filter(prod => 
+        prod.nombre_producto.toLowerCase().includes(termino)
+    );
+    mostrarProductos(filtrados);
 });
-/*
-function filtrarProductos(categoria) {
-    let productosFiltrados = [];
-    if (categoria === "todos") {
-    productosFiltrados = todosLosProductos;
-    }else{
-      productosFiltrados = todosLosProductos.filter((prod) =>
-      juego.tipo === categoria
-   );
-    }
 
-  mostrarProductos(productosFiltrados);
-}
-*/
 function agregarACarrito(id){
-    let prodSeleccionado = productos.find(p => p.id === id);
-    carrito.push(prodSeleccionado);
-    mostrarCarrito();
-    localStorage.setItem("carrito", carrito);
+    let prodSeleccionado = termosYmates.find(p => p.id === id);
+    if(prodSeleccionado){
+        carrito.push(prodSeleccionado);
+        guardarCarritoLocalStorage();
+        actualizarBarraInferior();
+        mostrarCarrito();
+    }
+}
+
+function actualizarBarraInferior() {
+    const total = carrito.reduce((acc, prod) => acc + parseFloat(prod.precio_producto), 0);
+    
+    resumenCarritoTexto.innerText = `${carrito.length} ítems`;
+    totalPrecioTexto.innerText = `$ ${total.toLocaleString()}`;
 }
 
 function mostrarCarrito(){
-    let cartaCarrito = "<ul>";
-    carrito.forEach((elemento, indice) => {
-        cartaCarrito +=
-        `<li class="bloque-item">
-            <p class="nombre-item">${elemento.nombre_producto} - $ ${elemento.precio_producto}</p>
-            <p class="nombre-item">${indice}</p>
-            <button class="boton-eliminar" onclick="eliminarElemento(${indice})">Eliminar</button>
-        </li>`
-        
-    });
+    contenedorCarrito.classList.toggle("hidden");
 
-    cartaCarrito += "</ul><button class='boton-eliminar' onclick='vaciarCarrito()'> Vaciar carrito </button>";
-    contenedorCarrito.innerHTML = cartaCarrito;
-
-    console.log(carrito);
+    let contenidoHTML = "<h3>Tu Pedido</h3><ul>";
+    
+    if(carrito.length === 0) {
+        contenidoHTML += "<p>El carrito está vacío</p>";
+    } else {
+        carrito.forEach((elemento, indice) => {
+            contenidoHTML +=
+            `<li class="bloque-item">
+                <span class="nombre-item">${elemento.nombre_producto}</span>
+                <span class="precio-item">$${elemento.precio_producto}</span>
+                <button class="boton-eliminar" onclick="eliminarElemento(${indice})">X</button>
+            </li>`;
+        });
+        contenidoHTML += `</ul><button class='boton-eliminar' style='width:100%; margin-top:10px;' onclick='vaciarCarrito()'> VACIAR TODO </button>`;
+    }
+    
+    contenedorCarrito.innerHTML = contenidoHTML;
 }
 
 function eliminarElemento(indice){
     carrito.splice(indice, 1);
+    guardarCarritoLocalStorage();
+    actualizarBarraInferior();
     mostrarCarrito(); 
 }
 
 function vaciarCarrito(){
     carrito = [];
-    contenedorCarrito.innerHTML = "";
+    guardarCarritoLocalStorage();
+    actualizarBarraInferior();
+    mostrarCarrito();
 }
 
 async function init() {
   cargarCarritoLocalStorage();
   const arrayDeProductos = await obtenerProductos();
-
-  if (arrayDeProductos && arrayDeProductos.length > 0) {
-    mostrarProductos(arrayDeProductos);
-  } else {
-    console.error("No se pudo obtener o el array está vacío.");
-  }
+  mostrarProductos(arrayDeProductos);
 }
 
 init();
