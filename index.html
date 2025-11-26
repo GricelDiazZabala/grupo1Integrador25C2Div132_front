@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,9 @@
       href="https://fonts.googleapis.com/css2?family=Milonga&display=swap"
       rel="stylesheet"
     />
-    <title>Dashboard</title>
+    <script src="../grupo1Integrador25C2Div132_front/js/main.js" defer></script>
+    <link rel="icon" type="image/png" href="https://w7.pngwing.com/pngs/409/950/png-transparent-mate-computer-icons-bigmidin-miscellaneous-orange-mate-thumbnail.png">
+    <title>Tienda de mates</title>
   </head>
   <body>
     <header>
@@ -37,12 +39,16 @@
             <li>Eliminar</li>
           </a>
         </ul>
+        <label for="barraBusqueda"> Buscar... </label>
+        <input id="barraBusqueda" type="text" />
+        <p id="contadorProductos"></p>
       </nav>
     </header>
     <main>
       <h1>Lista de productos</h1>
       <hr />
-      <div id="contenedor-productos"></div>
+      <div id="contenedorProductos"></div>
+      <aside id="contenedorCarrito"></aside>
     </main>
     <footer><h3>Gricel Diaz Zabala & Emiliano García</h3></footer>
     <script></script>
