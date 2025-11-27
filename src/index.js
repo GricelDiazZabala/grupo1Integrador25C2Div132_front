@@ -1,5 +1,5 @@
 //COSNSTANTES
-const API_BASE_URL = "http://localhost:3300/api/productos";
+const API_BASE_URL = "http://localhost:3300/api/products";
 //VARIABLES GLOBALES Y ELEMENTOS DOM
 let contenedorProductos = document.querySelector("#contenedorProductos");
 let contenedorCarrito = document.querySelector("#contenedorCarrito");

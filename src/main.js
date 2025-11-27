@@ -1,5 +1,5 @@
 
-const API_BASE_URL = "http://localhost:3300/api/productos";
+const API_BASE_URL = "http://localhost:3300/api/products";
 
 const userDisplay = document.getElementById("user-display");
 const productContainer = document.getElementById("product-container");
