@@ -5,39 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos Mates 132</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="../src/main.js" defer></script>
 </head>
 <body>
-    <header>
+    
+    <header class="tienda-main">
+        <div class="user-info">
+            <p>Hola, <span id="user-display" class="highlight-text">Usuario</span></p>
+        </div>
         <nav>
             <ul>
-                <li id = "user-welcome">
-                    <p>Bienvenido, <span id="user-display">usuario</span></p>
-                </li>
-                <a href="../index.html" id="logOut">
+                <a href="../pages/index.html" id="logOut" class="nav-link">
                     <li>Salir</li>
-                </a>
-                <a href="carrito.html" id="carrito">
-                    <li>Ver Carrito</li>
                 </a>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <h1>Nuestros Productos</h1>
+    <main class="tienda-main">
+        <div class="title-section">
+            <h1>ARMA TU PEDIDO</h1>
+            <p class="subtitle">Selecciona tus productos</p>
+        </div>
         
         <div class="filters-container">
-            <button class="filter-btn" id="todos">Todos</button>
+            <button class="filter-btn active" id="todos">Todos</button>
             <button class="filter-btn" id="mates">Mates</button>
             <button class="filter-btn" id="termos">Termos</button>
         </div>
 
-        <section id="product-container" class="container">
-            
-        </section>
+        <section id="product-container" class="products-grid">
+            </section>
 
     </main>
+
+    <footer class="bottom-bar">
+        <div class="total-info">
+            <span>Tu Orden</span>
+        </div>
+        <a href="../pages/carrito.html" class="btn-pagar">
+            Ver Carrito / Pagar
+        </a>
+    </footer>
 
 </body>
 </html>
