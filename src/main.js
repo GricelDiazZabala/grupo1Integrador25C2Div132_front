@@ -13,5 +13,8 @@ logOut.addEventListener("click", (event) => {
 
 
 //ToDo : 
-// hacer el css para todas las paginas, hacer el html de carrito y factura y sus respectivos css tambien, hacer los fetch y la logica del front end 
-// para mostrar los productos, filtrar y agregar al carrito. Hacer la logica del carrito y factura.
+// hacer el css para todas las paginas, 
+// hacer el html de carrito y factura y sus respectivos css 
+// tambien, hacer los fetch y la logica del front end 
+// para mostrar los productos, filtrar y agregar al carrito.
+//  Hacer la logica del carrito y factura.
