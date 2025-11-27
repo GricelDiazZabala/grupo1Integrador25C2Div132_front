@@ -1,11 +1,12 @@
 //COSNSTANTES
 const API_BASE_URL = "http://localhost:3300/api/productos";
-//VARIABLES GLOBALES
+//VARIABLES GLOBALES Y ELEMENTOS DOM
 let contenedorProductos = document.querySelector("#contenedorProductos");
 let contenedorCarrito = document.querySelector("#contenedorCarrito");
 let barraBusqueda = document.querySelector("#barraBusqueda");
 let resumenCarritoTexto = document.querySelector("#resumenCarritoTexto");
 let totalPrecioTexto = document.querySelector("#precioTotal");
+const botonCategoria = document.getElementById("catProducto")
 let termosYmates = [];
 let carrito = [];
 

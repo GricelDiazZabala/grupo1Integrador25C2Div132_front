@@ -128,14 +128,16 @@ const confirmarCompra = async () => {
     return;
   } ;
 
+  const nombreUsuario = localStorage.getItem('userName') || 'Invitado';
+  
   const datosVenta = {
     fecha: new Date().toISOString().slice(0, 19).replace("T", " "),
-    nombre_usuario: "AGREGAR LOGIN",
+    nombre_usuario: nombreUsuario,
     productos: carrito
   };
 
   try {
-    const respuesta = await fetch("http://localhost:3306/api/ventas", {
+    const respuesta = await fetch("http://localhost:3300/api/ventas", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datosVenta)
@@ -144,17 +146,19 @@ const confirmarCompra = async () => {
     const resultado = await respuesta.json();
     console.log(resultado);
 
+    localStorage.setItem("ultimaVenta", JSON.stringify(datosVenta));
+    
     alert("Compra realizada! Andá a la caja con tu ticket a retirarla");
     carrito.length = 0
     guardarCarritoLocalStorage()
-    mostrarCarrito();
+    
+    window.location.href = 'ticket.html';
 
   } catch (error) {
     console.error("Error al enviar los datos: ", error);
     alert("Error al procesar la solicitud");
   }
 };
-
 
 function initCarrito() {
   cargarCarritoLocalStorage();
