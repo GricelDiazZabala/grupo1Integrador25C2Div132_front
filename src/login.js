@@ -7,7 +7,7 @@ welcomeForm.addEventListener('submit', (event) => {
     
     if (userName) {
         localStorage.setItem('userName', userName);
-        window.location.href = '../pages/productos.html';
+        window.location.href = 'pages/productos.html';
     
     } else {
         alert('Necesitas colocar un nombre para continuar');
