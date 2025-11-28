@@ -20,6 +20,127 @@ body {
   padding-bottom: 100px;
 }
 
+/* formulario bienvenida styles */
+
+/* header del login */
+.cabecera {
+  background-color: rgba(18, 18, 18, 0.95);
+  border-bottom: 1px solid var(--border-color);
+  padding: 20px 30px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.marca h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.marca p {
+  color: var(--neon-green);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1rem;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/*el contenedor del login */
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 40px 20px;
+}
+
+/* formulario del login */
+.form-login {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.form-login:hover {
+  border-color: var(--neon-green);
+  transform: translateY(-5px);
+}
+
+.form-login h2 {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.form-login label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.form-login input[type="text"] {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 25px;
+  background-color: #2d2d2d;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-login input[type="text"]:focus {
+  outline: none;
+  border-color: var(--neon-green);
+  box-shadow: 0 0 10px rgba(118, 200, 72, 0.3);
+}
+
+.form-login input[type="text"]::placeholder {
+  color: var(--text-secondary);
+}
+
+/* boton del login */
+.btn-ingresar {
+  background-color: transparent;
+  border: 2px solid var(--neon-green);
+  color: var(--neon-green);
+  padding: 15px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-ingresar:hover {
+  background-color: var(--neon-green);
+  color: #000;
+  box-shadow: 0 0 15px rgba(118, 200, 72, 0.4);
+  transform: translateY(-2px);
+}
+
+
+/* tienda styles */
 
 .tienda-header {
   display: flex;
