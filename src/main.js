@@ -1,54 +1,72 @@
 
-const API_BASE_URL = "http://localhost:5500/api/products";
+const API_BASE_URL = "http://localhost:3300/api/products";
+const imgUrl = "http://localhost:3300";
 
 const userDisplay = document.getElementById("user-display");
 const productContainer = document.getElementById("product-container");
 const logOut = document.getElementById("logOut");
 const filterButtons = document.querySelectorAll('.filter-btn');
+const ordenarNombreBtn = document.getElementById('ordenar-por-nombre');
+const ordenarPrecioBtn = document.getElementById('ordenar-por-precio');
+const carritoCounter = document.getElementById('carrito-counter');
 
 let todosLosProductos = [];
+let productosMostrados = [];
 
+//funciones del carrito 
+
+let carrito = [];
+
+
+function guardarCarritoLocalStorage() {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+//funcion para mostrar la bienvenida al usuario
 function mostrarBienvenida() {
     const userName = localStorage.getItem('userName');
     if (userName && userDisplay) {
         userDisplay.textContent = userName;
+    }else {
+        userDisplay.textContent = "Invitado";
     }
 }
 
+//funcion para cerrar sesion
 logOut.addEventListener("click", (event) => {
     event.preventDefault(); 
-    localStorage.clear();
+    localStorage.clear(); //aca vacia el localstorage asi que el carrito tambien se vacia
     window.location.href = "../index.html";
 });
 
-let carrito = [];
 
-function guardarCarritoLocalStorage() {
-  localStorage.setItem("carritoProductos", JSON.stringify(carrito));
-}
-
+//funcion para retornar el carrito desde el localstorage si existe
 function cargarCarritoLocalStorage() {
-  const carritoGuardado = localStorage.getItem("carritoProductos");
-  if (carritoGuardado) {
-    carrito = JSON.parse(carritoGuardado);
+  const carritoStorage = localStorage.getItem("carrito");
+  if(carritoStorage) {
+    carrito = JSON.parse(carritoStorage);
   }
 }
 
+//funcion para obtener los productos desde la API
 async function obtenerProductos() {
   try {
     const respuesta = await fetch(API_BASE_URL);
     if (!respuesta.ok) throw new Error("API no disponible");
     
     const data = await respuesta.json();
-    todosLosProductos = data.payload || []; 
+    todosLosProductos = Array.isArray(data.payload) ? data.payload : data;
     mostrarProductos(todosLosProductos);
 
   } catch (error) {
+    productContainer.innerHTML = "<p>Error al cargar productos. Intenta mas tarde.</p>";
     console.error("No se pudieron cargar los productos:", error);
   }
 }
 
+// funcion para mostrar los productos en el contenedor y crear las cartas dinamicamente
 function mostrarProductos(array) {
+  productosMostrados = array;
   let cartaProducto = "";
   if (array.length === 0) {
     productContainer.innerHTML = "<p>No se encontraron productos.</p>";
@@ -58,7 +76,7 @@ function mostrarProductos(array) {
   array.forEach((prod) => {
     cartaProducto += `
         <div class="card-producto">
-          <img src="${prod.img_producto || "../img/placeholder.png"}" alt="${prod.nombre_producto}" class="img-producto">
+          <img src="${imgUrl}${prod.img_producto || "../img/placeholder.png"}" alt="${prod.nombre_producto}" class="img-producto">
           <h3>${prod.nombre_producto}</h3>
           <p>${prod.tipo_producto.toUpperCase()}</p>
           <p>$ ${prod.precio_producto}</p>
@@ -71,18 +89,21 @@ function mostrarProductos(array) {
   productContainer.innerHTML = cartaProducto;
 }
 
+// funcion para filtrar los productos por categoria
+
 function filtrarProductos(categoria) {
     let productosFiltrados = [];
     if (categoria === "todos") {
         productosFiltrados = todosLosProductos;
     } else {
         productosFiltrados = todosLosProductos.filter((prod) =>
-            prod.tipo_producto.toLowerCase() === categoria
+            prod.tipo_producto.toLowerCase() === categoria 
         );
     }
     mostrarProductos(productosFiltrados);
 }
 
+// eventos para los botones de filtro
 filterButtons.forEach(button => {
     button.addEventListener('click', (event) => {
         filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -103,13 +124,18 @@ function agregarACarrito(id){
         if (itemEnCarrito) {
             itemEnCarrito.cantidad += 1;
         } else {
-            carrito.push({
-                prodSeleccionado,
-                cantidad: 1 
-            });
-        }
-        
+  
+          carrito.push({
+          id: prodSeleccionado.id,
+          nombre: prodSeleccionado.nombre_producto,
+          tipo: prodSeleccionado.tipo_producto,
+          precio: prodSeleccionado.precio_producto,
+          img: prodSeleccionado.img_producto,
+          cantidad: 1,
+    });
+  }       
         guardarCarritoLocalStorage();
+        actualizarContadorCarrito();
         alert(`Se agregó ${prodSeleccionado.nombre_producto} al carrito!`);
     } else {
         console.error("Producto no encontrado con ID:", id);
@@ -117,10 +143,37 @@ function agregarACarrito(id){
 }
 
 
+function actualizarContadorCarrito() {
+    const totalCarrito = carrito.reduce((total, producto) => total + producto.cantidad, 0);
+    carritoCounter.textContent = totalCarrito;
+}
+
+// eventos para los botones de ordenamiento
+ordenarNombreBtn.addEventListener('click', ordenarPorNombre);
+ordenarPrecioBtn.addEventListener('click', ordenarPrecio);
+
+
+function ordenarPrecio() {
+  const productosOrdenados = [...productosMostrados];
+  productosOrdenados.sort((a, b) => a.precio_producto - b.precio_producto);
+  mostrarProductos(productosOrdenados);
+}
+
+function ordenarPorNombre(){
+  const productosOrdenados = [...productosMostrados];
+  productosOrdenados.sort((a, b) => a.nombre_producto.toLowerCase().localeCompare(b.nombre_producto.toLowerCase()));
+  mostrarProductos(productosOrdenados);
+}
+
+
+
+
+
 async function init() {
   mostrarBienvenida();
   cargarCarritoLocalStorage();
   await obtenerProductos();
+  
 }
 
 init();
