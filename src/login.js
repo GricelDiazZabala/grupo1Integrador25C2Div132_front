@@ -3,14 +3,14 @@ const btnTema = document.getElementById('cambiar-modo');
 let welcomeForm = document.getElementById('welcome-form');
 
 welcomeForm.addEventListener('submit', (event) => {
-    
+
     event.preventDefault();
     const userName = document.getElementById('user-name').value.trim();
-    
+
     if (userName) {
-        localStorage.setItem('userName', userName);
+        sessionStorage.setItem('userName', userName);
         window.location.href = 'pages/productos.html';
-    
+
     } else {
         alert('Necesitas colocar un nombre para continuar');
     }
@@ -28,22 +28,22 @@ function cambiarModo() {
     aplicarTema(nuevoTema);
 }
 
-if(btnTema) {
+if (btnTema) {
     btnTema.addEventListener('click', cambiarModo);
 }
 
 function cargarTemaGuardado() {
     const temaGuardado = localStorage.getItem('tema');
-    
+
     if (temaGuardado) {
         aplicarTema(temaGuardado);
     } else {
-        aplicarTema('claro'); 
+        aplicarTema('claro');
     }
 }
 
 async function init() {
-  cargarTemaGuardado();  
+    cargarTemaGuardado();
 }
 
 init();

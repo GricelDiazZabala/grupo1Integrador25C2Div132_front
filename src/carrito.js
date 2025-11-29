@@ -1,15 +1,18 @@
 const btnTema = document.getElementById('cambiar-modo');
+const BACKEND_BASE_URL = "http://localhost:3300";
+const linkBack = document.getElementById("adminLink");
+linkBack.href = BACKEND_BASE_URL;
 
 let carrito = [];
 
-function guardarCarritoLocalStorage() {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+function guardarCarritoSessionStorage() {
+  sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-function cargarCarritoLocalStorage() {
-  carrito = localStorage.getItem("carrito");
-  if (carrito) {
-    carrito = JSON.parse(carrito);
+function cargarCarritoSessionStorage() {
+  const carritoStorage = sessionStorage.getItem("carrito");
+  if(carritoStorage) {
+    carrito = JSON.parse(carritoStorage);
   }
 }
 
@@ -33,27 +36,29 @@ function calcularPrecioTotal() {
 }
 
 function mostrarCarrito() {
+  console.log("Contenido del carrito:", carrito);
   if (carrito.length === 0) {
     contenedorCarrito.innerHTML = `<h2 class="carrito-vacio-msg"> No hay productos en el carrito </h2>`;
 
-    carritoPieDePagina.innerHTML = ""; 
+    carritoPieDePagina.innerHTML = "";
     return;
   }
 
   contenedorCarrito.style.display = "block";
-  
+
   let htmlCarrito = "";
-  carrito.forEach((item, indice) => {   
-    const subtotal = item.precio_producto * item.cantidad;
+  carrito.forEach((item, indice) => {
+    const subtotal = item.precio * item.cantidad;
+    const imgSrc = item.img ? `${BACKEND_BASE_URL}${item.img}` : "../img/placeholder.png";
 
     htmlCarrito += `
       <li class="carrito-item">
           <div class="carrito-producto-info">
-              <img src="${item.img_producto || "../img/placeholder.png"}" alt="${item.nombre_producto}" class="carrito-img">
+            <img src="${imgSrc}" alt="${item.nombre}" class="carrito-img">
               <div class="carrito-detalles">
-                  <h3>${item.nombre_producto}</h3>
-                  <span class="carrito-tipo">${item.tipo_producto}</span>
-                  <span class="carrito-precio-unitario">Precio unitario: $${item.precio_producto}</span>
+                  <h3>${item.nombre}</h3>
+                  <span class="carrito-tipo">${item.tipo}</span>
+                  <span class="carrito-precio-unitario">Precio unitario: $${item.precio}</span>
               </div>
           </div>
 
@@ -69,6 +74,7 @@ function mostrarCarrito() {
               <div class="carrito-precio-subtotal">$${subtotal}</div>
               
               <button class="btn-eliminar" onclick="eliminarElemento(${indice})">
+              <img src="../img/delete.png" alt="Eliminar" class="icono-eliminar">
               </button>
           </div>
       </li>
@@ -97,7 +103,7 @@ function mostrarCarrito() {
 function aumentarCantidad(indice) {
   if (carrito[indice]) {
     carrito[indice].cantidad += 1;
-    guardarCarritoLocalStorage();
+    guardarCarritoSessionStorage();
     mostrarCarrito();
   }
 }
@@ -110,7 +116,7 @@ function disminuirCantidad(indice) {
       eliminarElemento(indice);
       return;
     }
-    guardarCarritoLocalStorage();
+    guardarCarritoSessionStorage();
     mostrarCarrito();
   }
 }
@@ -120,7 +126,7 @@ function eliminarElemento(indice) {
     confirm("¿Estás seguro de que querés eliminar este producto del carrito?")
   ) {
     carrito.splice(indice, 1);
-    guardarCarritoLocalStorage();
+    guardarCarritoSessionStorage();
     mostrarCarrito();
   }
 }
@@ -128,26 +134,28 @@ function eliminarElemento(indice) {
 function vaciarCarrito() {
   if (confirm("¿Estás seguro de que querés vaciar el carrito?")) {
     carrito.length = 0;
-    guardarCarritoLocalStorage();
+    guardarCarritoSessionStorage();
     mostrarCarrito();
   }
 }
 
 const confirmarCompra = async () => {
-  if (!confirm("Deseas confirmar la compra?")){
+  if (!confirm("Deseas confirmar la compra?")) {
     return;
-  } ;
-
-  const nombreUsuario = localStorage.getItem('userName') || 'Invitado';
-  
-  const datosVenta = {
-    fecha: new Date().toISOString().slice(0, 19).replace("T", " "),
-    nombre_usuario: nombreUsuario,
-    productos: carrito
   };
 
+  const nombreUsuario = sessionStorage.getItem('userName') || 'Invitado';
+
+  const datosVenta = {
+  nombre_usuario: nombreUsuario,
+  productos: carrito.map(item => ({
+    id_producto: item.id,       
+    cantidad: item.cantidad     
+  }))
+};
+
   try {
-    const respuesta = await fetch("http://localhost:3300/api/ventas", {
+    const respuesta = await fetch("http://localhost:3300/api/sales", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datosVenta)
@@ -156,12 +164,12 @@ const confirmarCompra = async () => {
     const resultado = await respuesta.json();
     console.log(resultado);
 
-    localStorage.setItem("ultimaVenta", JSON.stringify(datosVenta));
-    
-    alert("Compra realizada! Andá a la caja con tu ticket a retirarla");
+    sessionStorage.setItem("ultimaVenta", JSON.stringify(datosVenta));
+
+    alert("compra finalizada!");
     carrito.length = 0
-    guardarCarritoLocalStorage()
-    
+    guardarCarritoSessionStorage()
+
     window.location.href = 'ticket.html';
 
   } catch (error) {
@@ -171,33 +179,33 @@ const confirmarCompra = async () => {
 };
 
 const aplicarTema = (tema) => {
-    document.documentElement.setAttribute('data-theme', tema);
-    localStorage.setItem('tema', tema);
+  document.documentElement.setAttribute('data-theme', tema);
+  localStorage.setItem('tema', tema);
 };
 
 function cambiarModo() {
-    const temaActual = document.documentElement.getAttribute('data-theme');
-    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
-    aplicarTema(nuevoTema);
+  const temaActual = document.documentElement.getAttribute('data-theme');
+  const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+  aplicarTema(nuevoTema);
 }
 
-if(btnTema) {
-    btnTema.addEventListener('click', cambiarModo);
+if (btnTema) {
+  btnTema.addEventListener('click', cambiarModo);
 }
 
 function cargarTemaGuardado() {
-    const temaGuardado = localStorage.getItem('tema');
-    
-    if (temaGuardado) {
-        aplicarTema(temaGuardado);
-    } else {
-        aplicarTema('claro'); 
-    }
+  const temaGuardado = localStorage.getItem('tema');
+
+  if (temaGuardado) {
+    aplicarTema(temaGuardado);
+  } else {
+    aplicarTema('claro');
+  }
 }
 
 function initCarrito() {
   cargarTemaGuardado();
-  cargarCarritoLocalStorage();
+  cargarCarritoSessionStorage();
   mostrarCarrito();
 }
 

@@ -668,3 +668,8 @@ ul {
     transform: scale(1.05);
     box-shadow: 0 0 15px var(--accent-color);
 }
+
+.icono-eliminar {
+  width: 20px;
+  height: 20px;
+}

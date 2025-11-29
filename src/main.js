@@ -24,13 +24,13 @@ let productosMostrados = [];
 let carrito = [];
 
 
-function guardarCarritoLocalStorage() {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
+function guardarCarritoSessionStorage() {
+  sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 //funcion para mostrar la bienvenida al usuario
 function mostrarBienvenida() {
-    const userName = localStorage.getItem('userName');
+    const userName = sessionStorage.getItem('userName');
     if (userName && userDisplay) {
         userDisplay.textContent = userName;
     }else {
@@ -41,14 +41,14 @@ function mostrarBienvenida() {
 //funcion para cerrar sesion
 logOut.addEventListener("click", (event) => {
     event.preventDefault(); 
-    localStorage.clear(); //aca vacia el localstorage asi que el carrito tambien se vacia
+    sessionStorage.clear(); //aca vacia el localstorage asi que el carrito tambien se vacia
     window.location.href = "../index.html";
 });
 
 
 //funcion para retornar el carrito desde el localstorage si existe
-function cargarCarritoLocalStorage() {
-  const carritoStorage = localStorage.getItem("carrito");
+function cargarCarritoSessionStorage() {
+  const carritoStorage = sessionStorage.getItem("carrito");
   if(carritoStorage) {
     carrito = JSON.parse(carritoStorage);
   }
@@ -140,7 +140,7 @@ function agregarACarrito(id){
           cantidad: 1,
     });
   }       
-        guardarCarritoLocalStorage();
+        guardarCarritoSessionStorage();
         actualizarContadorCarrito();
         alert(`Se agregó ${prodSeleccionado.nombre_producto} al carrito!`);
     } else {
@@ -199,7 +199,8 @@ function cargarTemaGuardado() {
 async function init() {
   cargarTemaGuardado();
   mostrarBienvenida();
-  cargarCarritoLocalStorage();
+  cargarCarritoSessionStorage();
+  actualizarContadorCarrito()
   await obtenerProductos();
   
 }
