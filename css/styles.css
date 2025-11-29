@@ -1,22 +1,22 @@
 :root {
   /* --- TEMA CLARO (Por defecto) --- */
-  --bg-color: #e3f2fd;
-  --card-bg: #ffffff;
-  --text-color: #1e2a38;
-  --text-secondary: #80b5cb;
-  --border-color: #ddd;
-  --accent-color: #4fc3f7;
-  --accent-hover: #039be5;
+  --bg-color: #CAF0F8;
+  --card-bg: #ADE8F4;
+  --text-color: #03045E;
+  --text-secondary: #023E8A;
+  --border-color: #0077B6;
+  --accent-color: #0096C7;
+  --accent-hover: #00B4D8;
 }
 
 [data-theme='oscuro'] {
-  --bg-color: #121212; 
-  --card-bg: #1e1e1e;
-  --text-color: #ffffff;
-  --text-secondary: #a0a0a0;
-  --border-color: #333;
-  --accent-color: #4fc3f7; 
-  --accent-hover: #039be5;
+  --bg-color: #111D13; 
+  --card-bg: #122315;
+  --text-color: #A1CCA5;
+  --text-secondary: #8FB996;
+  --border-color: #415D43;
+  --accent-color: #709775;
+  --accent-hover: #417444; 
 }
 
 body {
@@ -152,7 +152,7 @@ body {
 .form-login input[type="text"]:focus {
   outline: none;
   border-color: var(--accent-color);
-  box-shadow: 0 0 10px rgba(118, 200, 72, 0.3);
+  box-shadow: 0 0 10px var(--accent-color);
 }
 
 .form-login input[type="text"]::placeholder {
@@ -179,7 +179,7 @@ body {
 .btn-ingresar:hover {
   background-color: var(--accent-hover);
   color: #000;
-  box-shadow: 0 0 15px rgba(118, 200, 72, 0.4);
+  box-shadow: 0 0 15px var(--accent-color);
   transform: translateY(-2px);
 }
 
@@ -289,7 +289,7 @@ ul {
 .filter-btn:hover, .filter-btn.active {
   background-color: var(--accent-hover);
   color: #000; /* Texto negro sobre verde */
-  box-shadow: 0 0 15px rgba(118, 200, 72, 0.4);
+  box-shadow: 0 0 15px var(--accent-color);
 }
 
 .ordenar-buttons {
@@ -301,7 +301,7 @@ ul {
 .order-btn:hover{
     background-color: var(--accent-hover);
     color: #000;
-    box-shadow: 0 0 15px rgba(118, 200, 72, 0.4);
+    box-shadow: 0 0 15px var(--accent-color);
 }
 
 .products-grid {
