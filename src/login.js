@@ -1,3 +1,5 @@
+const btnTema = document.getElementById('cambiar-modo');
+
 let welcomeForm = document.getElementById('welcome-form');
 
 welcomeForm.addEventListener('submit', (event) => {
@@ -14,3 +16,19 @@ welcomeForm.addEventListener('submit', (event) => {
     }
 
 });
+
+
+const aplicarTema = (tema) => {
+    document.documentElement.setAttribute('data-theme', tema);
+    localStorage.setItem('tema', tema);
+};
+
+function cambiarModo() {
+    const temaActual = document.documentElement.getAttribute('data-theme');
+    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+    aplicarTema(nuevoTema);
+}
+
+if(btnTema) {
+    btnTema.addEventListener('click', cambiarModo);
+}

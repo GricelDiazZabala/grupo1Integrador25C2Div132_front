@@ -1,3 +1,5 @@
+const btnTema = document.getElementById('cambiar-modo');
+
 function cargarTicket() {
     const datosVentaJSON = localStorage.getItem("ultimaVenta");
     const contenedorTicket = document.getElementById("contenedor-ticket");
@@ -43,3 +45,19 @@ function cargarTicket() {
 
 
 document.addEventListener('DOMContentLoaded', cargarTicket);
+
+
+const aplicarTema = (tema) => {
+    document.documentElement.setAttribute('data-theme', tema);
+    localStorage.setItem('tema', tema);
+};
+
+function cambiarModo() {
+    const temaActual = document.documentElement.getAttribute('data-theme');
+    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+    aplicarTema(nuevoTema);
+}
+
+if(btnTema) {
+    btnTema.addEventListener('click', cambiarModo);
+}

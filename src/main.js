@@ -10,6 +10,9 @@ const ordenarNombreBtn = document.getElementById('ordenar-por-nombre');
 const ordenarPrecioBtn = document.getElementById('ordenar-por-precio');
 const carritoCounter = document.getElementById('carrito-counter');
 
+//para el cambio de tema
+const btnTema = document.getElementById('cambiar-modo');
+
 let todosLosProductos = [];
 let productosMostrados = [];
 
@@ -165,9 +168,20 @@ function ordenarPorNombre(){
   mostrarProductos(productosOrdenados);
 }
 
+const aplicarTema = (tema) => {
+    document.documentElement.setAttribute('data-theme', tema);
+    localStorage.setItem('tema', tema);
+};
 
+function cambiarModo() {
+    const temaActual = document.documentElement.getAttribute('data-theme');
+    const nuevoTema = temaActual === 'oscuro' ? 'claro' : 'oscuro';
+    aplicarTema(nuevoTema);
+}
 
-
+if(btnTema) {
+    btnTema.addEventListener('click', cambiarModo);
+}
 
 async function init() {
   mostrarBienvenida();
