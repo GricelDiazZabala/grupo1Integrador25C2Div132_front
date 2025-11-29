@@ -10,14 +10,15 @@
 }
 
 [data-theme='oscuro'] {
-  --bg-color: #111D13; 
-  --card-bg: #122315;
-  --text-color: #A1CCA5;
-  --text-secondary: #8FB996;
-  --border-color: #415D43;
-  --accent-color: #709775;
-  --accent-hover: #417444; 
+  --bg-color: #121212; 
+  --card-bg: #1e1e1e;
+  --text-color: #ffffff;
+  --text-secondary: #a0a0a0;
+  --border-color: #76c848;
+  --accent-color: #76c848;
+  --accent-hover: #5da335; 
 }
+
 
 body {
   background-color: var(--bg-color);
