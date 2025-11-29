@@ -3,13 +3,13 @@ const btnTema = document.getElementById('cambiar-modo');
 let carrito = [];
 
 function guardarCarritoLocalStorage() {
-  localStorage.setItem("carritoProductos", JSON.stringify(carrito));
+  localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 function cargarCarritoLocalStorage() {
-  const carritoGuardado = localStorage.getItem("carritoProductos");
-  if (carritoGuardado) {
-    carrito = JSON.parse(carritoGuardado);
+  carrito = localStorage.getItem("carrito");
+  if (carrito) {
+    carrito = JSON.parse(carrito);
   }
 }
 
@@ -43,8 +43,7 @@ function mostrarCarrito() {
   contenedorCarrito.style.display = "block";
   
   let htmlCarrito = "";
-  
-  carrito.forEach((item, indice) => {    
+  carrito.forEach((item, indice) => {   
     const subtotal = item.precio_producto * item.cantidad;
 
     htmlCarrito += `
@@ -53,17 +52,17 @@ function mostrarCarrito() {
               <img src="${item.img_producto || "../img/placeholder.png"}" alt="${item.nombre_producto}" class="carrito-img">
               <div class="carrito-detalles">
                   <h3>${item.nombre_producto}</h3>
-                  <span class="carrito-tipo">${item.tipo_producto.toUpperCase()}</span>
+                  <span class="carrito-tipo">${item.tipo_producto}</span>
                   <span class="carrito-precio-unitario">Precio unitario: $${item.precio_producto}</span>
               </div>
           </div>
 
           <div class="carrito-producto-acciones">
               <div class="carrito-cantidad-control">
-                  <button class="btn-cantidad" onclick="disminuirCantidad(${indice})">
+                  <button class="btn-cantidad" onclick="disminuirCantidad(${indice})">-
                   </button>
                   <span class="item-cantidad">${item.cantidad}</span>
-                  <button class="btn-cantidad" onclick="aumentarCantidad(${indice})">
+                  <button class="btn-cantidad" onclick="aumentarCantidad(${indice})">+
                   </button>
               </div>
               
