@@ -34,7 +34,9 @@ function calcularPrecioTotal() {
 
 function mostrarCarrito() {
   if (carrito.length === 0) {
-    contenedorCarrito.innerHTML = `<h2> No hay productos en el carrito. </h2>`
+    contenedorCarrito.innerHTML = `<h2 class="carrito-vacio-msg"> No hay productos en el carrito </h2>`;
+
+    carritoPieDePagina.innerHTML = ""; 
     return;
   }
 
@@ -44,45 +46,52 @@ function mostrarCarrito() {
   
   carrito.forEach((item, indice) => {    
     const subtotal = item.precio_producto * item.cantidad;
-    htmlCarrito += `
-      <li class="list-carrritoProducto">
-      <div class="cont-info-producto">
-        <img src="${item.img_producto || "img/placeholder.png"}" alt="${item.nombre_producto}" class="img_carrito">
-        <div class="card-carrito-producto">
-            <h3>${item.nombre_producto}</h3>
-            <div class="cont-datos-producto">
-              <span>${item.tipo_producto.toUpperCase()} | $${item.precio_producto}</span>
-            </div>
-        </div>
-      </div>
-      <div class="datos-prod-carrito">
-        <div class="card-edicion-carrito">
-          <button class="boton-disminuir-cantidad edit-prod-carrito" onclick="disminuirCantidad(${indice})"><ion-icon name="remove-circle-outline" class="svg-minus svg-button"></ion-icon></button>
-          <p class="item-cantidad-carrito">${item.cantidad}</p>
-          <button class="boton-aumentar-cantidad edit-prod-carrito" onclick="aumentarCantidad(${indice})"><ion-icon name="add-circle-outline" class="svg-plus svg-button"></ion-icon></button>
-        </div>
-        <button class="boton-eliminar-elemento edit-prod-carrito" onclick="eliminarElemento(${indice})"><ion-icon name="trash-outline" class="svg-trash svg-button"></ion-icon></button>
-        <div class="card-precio-carrito">$${subtotal}</div>
-      </div>
-          </li>
-    `;
 
-    carritoPieDePagina.innerHTML = `
-            <div id="cont-total">
-              <span class="">Total</span>
-              <span id="precio-total-carrito" class="">$ ${calcularPrecioTotal()}</span>
-            </div>
-            <div class="cont-cart-actions">
-              <button id="boton-vaciar-carrito" onclick="vaciarCarrito()" class="">
-                Vaciar Carrito
+    htmlCarrito += `
+      <li class="carrito-item">
+          <div class="carrito-producto-info">
+              <img src="${item.img_producto || "../img/placeholder.png"}" alt="${item.nombre_producto}" class="carrito-img">
+              <div class="carrito-detalles">
+                  <h3>${item.nombre_producto}</h3>
+                  <span class="carrito-tipo">${item.tipo_producto.toUpperCase()}</span>
+                  <span class="carrito-precio-unitario">Precio unitario: $${item.precio_producto}</span>
+              </div>
+          </div>
+
+          <div class="carrito-producto-acciones">
+              <div class="carrito-cantidad-control">
+                  <button class="btn-cantidad" onclick="disminuirCantidad(${indice})">
+                  </button>
+                  <span class="item-cantidad">${item.cantidad}</span>
+                  <button class="btn-cantidad" onclick="aumentarCantidad(${indice})">
+                  </button>
+              </div>
+              
+              <div class="carrito-precio-subtotal">$${subtotal}</div>
+              
+              <button class="btn-eliminar" onclick="eliminarElemento(${indice})">
               </button>
-              <button id="boton-confirmar-compra" onclick="confirmarCompra()"class="">
-                Confirmar Compra
-              </button>
-            </div>`
+          </div>
+      </li>
+    `;
   });
+
   listaCarrito.innerHTML = htmlCarrito;
+
+  carritoPieDePagina.innerHTML = `
+      <div class="carrito-resumen">
+          <div class="resumen-row">
+              <span>Total a pagar:</span>
+              <span class="resumen-total">$${calcularPrecioTotal()}</span>
+          </div>
+          <div class="resumen-acciones">
+              <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar Carrito</button>
+              <button class="btn-pagar-carrito" onclick="confirmarCompra()">Confirmar Compra</button>
+          </div>
+      </div>
+  `;
 }
+
 
 
 
@@ -161,7 +170,6 @@ const confirmarCompra = async () => {
     alert("Error al procesar la solicitud");
   }
 };
-
 
 const aplicarTema = (tema) => {
     document.documentElement.setAttribute('data-theme', tema);

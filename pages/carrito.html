@@ -3,47 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito | Termos y Mates</title>
+    <title>Carrito de Compras</title>
+    <script src="../src/carrito.js" defer></script>
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="icon" type="image/png" href="../img/mateIcon.png" />
-    <script src="../src/carrito.js" defer></script>
-    <script src="../src/login.js" defer></script>
   </head>
   <body>
-    <header class="tienda-header">
-      <div class="logo-container">
-        <img src="../img/logo.png" alt="Logo Mates 132" class="logo" />
-      </div>
-      <div class="user-info">
-        <p>
-          Hola, <span id="user-display" class="highlight-text">Usuario</span>
-        </p>
-      </div>
+    <header>
       <nav>
-        <ul>
-          <li>
-            <a href="../pages/productos.html" id="volver-a-productos" class="nav-link">Volver a productos</a>
-          </li>
-          <li>
+            <a
+              href="../pages/productos.html"
+              id="volver-a-productos"
+              class="nav-link"
+              >Volver a productos</a
+            >
             <a href="../index.html" id="logOut" class="nav-link">Salir</a>
-          </li>
-        </ul>
+            <a id="adminLink" class="nav-link">Login Admin</a>
         <button id="cambiar-modo">Cambiar modo</button>
       </nav>
     </header>
 
-    <main class="tienda-main">
-      <div class="title-section">
-        <h1>Tu Carrito</h1>
-        <p class="subtitle">Revisa tus productos antes de finalizar</p>
-      </div>
+    <main id="main-carrito">
+      <h1> Carrito</h1>
 
-      <section id="contenedor-carrito" class="carrito-container">
-        <ul id="lista-carrito" class="lista-carrito-estilo"></ul>
+      <section id="contenedor-carrito">
+        <ul id="lista-carrito"></ul>
 
-        <div id="carrito-pie-de-pagina" class="carrito-footer">
-          <p id="carrito-vacio-mensaje">Tu carrito está vacío.</p>
-        </div>
+        <div id="carrito-pie-de-pagina"></div>
       </section>
     </main>
   </body>

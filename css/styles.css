@@ -218,6 +218,7 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   transition: color 0.3s;
+  padding: 10px;
 }
 
 .nav-link:hover {
@@ -442,101 +443,228 @@ ul {
   color: var(--text-secondary);
 }
 
-/*estilado del carrito*/
+/* --- ESTILADO DEL CARRITO --- */
 
-.carrito-container {
-  max-width: 800px;
-  margin: 0 auto;
-  min-height: 50vh;
+#main-carrito {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.lista-carrito-estilo {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+#main-carrito h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.carrito-vacio-msg {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 50px;
+}
+
+#lista-carrito {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .carrito-item {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: transform 0.2s, border-color 0.2s;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .carrito-item:hover {
-  border-color: var(--accent-color);
-  transform: translateX(5px);
+    border-color: var(--accent-color);
+    transform: translateX(5px);
 }
 
-.carrito-item img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  background-color: #fff;
-  border-radius: 50%;
-  padding: 5px;
-  border: 1px solid #ddd;
+
+.carrito-producto-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
 }
 
-.carrito-item-info {
-  flex-grow: 1;
-  margin-left: 20px;
+.carrito-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
 }
 
-.carrito-item-title {
-  font-weight: bold;
-  color: var(--text-color);
-  text-transform: uppercase;
-  margin-bottom: 5px;
-  display: block;
+.carrito-detalles {
+    display: flex;
+    flex-direction: column;
 }
 
-.carrito-item-price {
-  color: var(--accent-color);
-  font-weight: bold;
+.carrito-detalles h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+.carrito-tipo {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: bold;
+}
+
+.carrito-precio-unitario {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 3px;
+}
+
+
+.carrito-producto-acciones {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.carrito-cantidad-control {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.btn-cantidad {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.btn-cantidad:hover {
+    color: var(--accent-color);
+}
+
+.item-cantidad {
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.carrito-precio-subtotal {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    min-width: 80px;
+    text-align: right;
 }
 
 .btn-eliminar {
-  background-color: transparent;
-  border: none;
-  color: #ff5252;
-  cursor: pointer;
-  font-size: 1.5rem;
-  transition: transform 0.2s, color 0.2s;
-  display: flex;
-  align-items: center;
+    background: transparent;
+    border: none;
+    color: #ff5252;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
 }
 
 .btn-eliminar:hover {
-  color: #d50000;
-  transform: scale(1.2);
+    color: #d50000;
+    transform: scale(1.1);
 }
 
-.carrito-footer {
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 2px dashed var(--border-color);
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 15px;
+#carrito-pie-de-pagina {
+    margin-top: 40px;
+    border-top: 2px dashed var(--border-color);
+    padding-top: 20px;
 }
 
-.carrito-total {
-  font-size: 1.5rem;
-  color: var(--text-color);
-  font-weight: bold;
+.carrito-resumen {
+    background-color: rgba(18, 18, 18, 0.95);
+    color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+    border: 1px solid var(--border-color);
 }
 
-.carrito-total span {
-  color: var(--accent-color);
+.resumen-row {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.resumen-total {
+    font-size: 2rem;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.resumen-acciones {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-vaciar {
+    background: transparent;
+    border: 1px solid #ff5252;
+    color: #ff5252;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.btn-vaciar:hover {
+    background-color: #ff5252;
+    color: #fff;
+}
+
+.btn-pagar-carrito {
+    background-color: var(--accent-color);
+    color: #121212;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.btn-pagar-carrito:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--accent-color);
 }
