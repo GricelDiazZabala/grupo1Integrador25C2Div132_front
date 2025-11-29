@@ -186,7 +186,18 @@ if(btnTema) {
     btnTema.addEventListener('click', cambiarModo);
 }
 
+function cargarTemaGuardado() {
+    const temaGuardado = localStorage.getItem('tema');
+    
+    if (temaGuardado) {
+        aplicarTema(temaGuardado);
+    } else {
+        aplicarTema('claro'); 
+    }
+}
+
 function initCarrito() {
+  cargarTemaGuardado();
   cargarCarritoLocalStorage();
   mostrarCarrito();
 }
