@@ -31,3 +31,19 @@ function cambiarModo() {
 if(btnTema) {
     btnTema.addEventListener('click', cambiarModo);
 }
+
+function cargarTemaGuardado() {
+    const temaGuardado = localStorage.getItem('tema');
+    
+    if (temaGuardado) {
+        aplicarTema(temaGuardado);
+    } else {
+        aplicarTema('claro'); 
+    }
+}
+
+async function init() {
+  cargarTemaGuardado();  
+}
+
+init();
