@@ -1,6 +1,9 @@
 
 const API_BASE_URL = "http://localhost:3300/api/products";
 const imgUrl = "http://localhost:3300";
+const BACKEND_BASE_URL = "http://localhost:3300";
+const linkBack = document.getElementById("adminLink");
+linkBack.href = BACKEND_BASE_URL;
 
 const userDisplay = document.getElementById("user-display");
 const productContainer = document.getElementById("product-container");

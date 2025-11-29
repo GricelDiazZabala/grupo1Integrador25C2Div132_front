@@ -46,7 +46,6 @@ function cargarTicket() {
 
 document.addEventListener('DOMContentLoaded', cargarTicket);
 
-
 const aplicarTema = (tema) => {
     document.documentElement.setAttribute('data-theme', tema);
     localStorage.setItem('tema', tema);
