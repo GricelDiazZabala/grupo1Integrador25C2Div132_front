@@ -551,7 +551,7 @@ ul {
 }
 
 .btn-cantidad {
-    background: transparent;
+  background-color: transparent;
     border: none;
     color: var(--text-color);
     font-size: 1.5rem;
