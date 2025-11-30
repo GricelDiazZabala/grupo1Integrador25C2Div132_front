@@ -1,7 +1,7 @@
 const btnTema = document.getElementById('cambiar-modo');
 
 function cargarTicket() {
-    const datosVentaJSON = localStorage.getItem("ultimaVenta");
+    const datosVentaJSON = sessionStorage.getItem("ultimaVenta");
     const contenedorTicket = document.getElementById("contenedor-ticket");
     
     if (!datosVentaJSON) {

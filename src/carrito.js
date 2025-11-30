@@ -11,7 +11,7 @@ function guardarCarritoSessionStorage() {
 
 function cargarCarritoSessionStorage() {
   const carritoStorage = sessionStorage.getItem("carrito");
-  if(carritoStorage) {
+  if (carritoStorage) {
     carrito = JSON.parse(carritoStorage);
   }
 }
@@ -141,18 +141,23 @@ function vaciarCarrito() {
 
 const confirmarCompra = async () => {
   if (!confirm("Deseas confirmar la compra?")) {
-    return;
+    return
   };
+
+  if (carrito.length === 0) {
+    alert("El carrito está vacio. No se puede confirmar la compra.");
+    return;
+  }
 
   const nombreUsuario = sessionStorage.getItem('userName') || 'Invitado';
 
   const datosVenta = {
-  nombre_usuario: nombreUsuario,
-  productos: carrito.map(item => ({
-    id_producto: item.id,       
-    cantidad: item.cantidad     
-  }))
-};
+    nombre_usuario: nombreUsuario,
+    productos: carrito.map(item => ({
+      id_producto: item.id,
+      cantidad: item.cantidad
+    }))
+  };
 
   try {
     const respuesta = await fetch("http://localhost:3300/api/sales", {
@@ -161,7 +166,13 @@ const confirmarCompra = async () => {
       body: JSON.stringify(datosVenta)
     });
 
+    if (!respuesta.ok) {
+      alert(resultado.error || "Error al procesar la solicitud"); return;
+    }
+
     const resultado = await respuesta.json();
+
+    
     console.log(resultado);
 
     sessionStorage.setItem("ultimaVenta", JSON.stringify(datosVenta));
