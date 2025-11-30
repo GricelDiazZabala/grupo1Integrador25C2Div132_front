@@ -172,10 +172,12 @@ const confirmarCompra = async () => {
 
     const resultado = await respuesta.json();
 
-    
+
     console.log(resultado);
 
-    sessionStorage.setItem("ultimaVenta", JSON.stringify(datosVenta));
+    if (resultado.factura) {
+      sessionStorage.setItem("ultimaVenta", JSON.stringify(resultado.factura));
+    }
 
     alert("compra finalizada!");
     carrito.length = 0

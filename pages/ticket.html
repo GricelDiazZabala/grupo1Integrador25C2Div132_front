@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ticket</title>
+    <title>Ticket de Compra</title>
     <link rel="stylesheet" href="../css/styles.css" /> 
     <link rel="icon" type="image/png" href="../img/mateIcon.png" />
     <script src="../src/ticket.js" defer></script>
@@ -21,13 +21,14 @@
     </header>
 
     <main id="main-ticket">
-      <h1>Ticket de Compra</h1>
-      
       <section id="contenedor-ticket">
         <p>Cargando detalles de la compra...</p>
       </section>
 
-      <button onclick="window.print()">Imprimir Ticket</button>
+      <div style="text-align: center; margin-top: 20px;">
+        <button onclick="window.print()" style="padding: 10px 20px; margin: 5px;">Imprimir Ticket</button>
+        <button onclick="reiniciarSistema()" style="padding: 10px 20px; margin: 5px;">Finalizar compra</button>
+      </div>
     </main>
   </body>
 </html>

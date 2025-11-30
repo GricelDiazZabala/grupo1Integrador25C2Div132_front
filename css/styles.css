@@ -673,3 +673,84 @@ ul {
   width: 20px;
   height: 20px;
 }
+
+
+.ticket {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px solid #333;
+}
+
+.ticket-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ticket-header h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.ticket-productos {
+    margin: 20px 0;
+}
+
+.lista-productos-ticket {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.producto-ticket {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+.producto-info {
+    flex: 1;
+}
+
+.producto-nombre {
+    display: block;
+    font-weight: bold;
+}
+
+.producto-tipo {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.producto-precios {
+    text-align: right;
+}
+
+.ticket-total {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f8f8;
+    border-radius: 5px;
+}
+
+.ticket-total h2 {
+    color: #2d3748;
+    margin: 0;
+}
+
+.ticket-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.mensaje-final {
+    font-style: italic;
+    color: #666;
+}
