@@ -754,3 +754,21 @@ ul {
     font-style: italic;
     color: #666;
 }
+
+
+@media print {
+  header, nav, button {
+    display: none !important; 
+  }
+
+  #main-ticket {
+    margin: 0;
+    padding: 0;
+  }
+
+  .ticket {
+    border: 1px solid #000;
+    box-shadow: none;
+    width: 100%;
+  }
+}

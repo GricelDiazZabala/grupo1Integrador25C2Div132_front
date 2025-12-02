@@ -63,10 +63,6 @@ function cargarTicket() {
 
 }
 
-
-document.addEventListener('DOMContentLoaded', cargarTicket);
-
-
 function reiniciarSistema() {
 
     sessionStorage.clear();
@@ -102,6 +98,8 @@ function cargarTemaGuardado() {
 
 async function init() {
     cargarTemaGuardado();
+    cargarTicket(); 
+    setTimeout(() => reiniciarSistema(), 10000);
 }
 
-init();
+document.addEventListener('DOMContentLoaded', init);
