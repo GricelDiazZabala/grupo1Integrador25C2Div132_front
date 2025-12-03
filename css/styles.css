@@ -2,8 +2,8 @@
   /* --- TEMA CLARO (Por defecto) --- */
   --bg-color: #CAF0F8;
   --card-bg: #ADE8F4;
-  --text-color: #03045E;
-  --text-secondary: #023E8A;
+  --text-color: #0f11a3;
+  --text-secondary: #0f4fa3;
   --border-color: #0077B6;
   --accent-color: #0096C7;
   --accent-hover: #00B4D8;
@@ -154,7 +154,7 @@ body {
   width: 100%;
   padding: 15px;
   margin-bottom: 25px;
-  background-color: #2d2d2d;
+  background-color: #c6c4cd;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--accent-color);
