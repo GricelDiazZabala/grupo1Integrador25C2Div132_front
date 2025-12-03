@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ticket de Compra</title>
-    <link rel="stylesheet" href="../css/styles.css" /> 
-    <link rel="icon" type="image/png" href="../img/mateIcon.png" />
-    <script src="../src/ticket.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <a href="../pages/productos.html">
-            <li>Volver a Productos</li>
-          </a>
-        </ul>
-        <button id="cambiar-modo">Cambiar modo</button>
-      </nav>
-    </header>
 
-    <main id="main-ticket">
-      <section id="contenedor-ticket">
-        <p>Cargando detalles de la compra...</p>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket de Compra</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" type="image/png" href="../img/mateIcon.png" />
+  <script src="../src/ticket.js" defer></script>
+</head>
 
-      <div style="text-align: center; margin-top: 20px;">
-        <button onclick="window.print()" style="padding: 10px 20px; margin: 5px;">Imprimir Ticket</button>
-        <button onclick="reiniciarSistema()" style="padding: 10px 20px; margin: 5px;">Finalizar compra</button>
-      </div>
-    </main>
-  </body>
+<body>
+  <header class="tienda-header">
+    <div class="logo-container">
+      <img src="../img/logo.png" alt="Logo Mates 132" class="logo">
+    </div>
+    <nav>
+      <button id="cambiar-modo" class="cambiar-modo-ticket">Cambiar modo</button>
+    </nav>
+  </header>
+
+  <main id="main-ticket">
+    <section id="contenedor-ticket">
+      <p>Cargando detalles de la compra...</p>
+    </section>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <button onclick="window.print()" style="padding: 10px 20px; margin: 5px;">Imprimir Ticket</button>
+      <button onclick="reiniciarSistema()" style="padding: 10px 20px; margin: 5px;">Finalizar compra</button>
+    </div>
+  </main>
+</body>
+
 </html>

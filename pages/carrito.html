@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito de Compras</title>
-    <script src="../src/carrito.js" defer></script>
-    <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="icon" type="image/png" href="../img/mateIcon.png" />
-  </head>
-  <body>
-    <header>
-      <nav>
-            <a
-              href="../pages/productos.html"
-              id="volver-a-productos"
-              class="nav-link"
-              >Volver a productos</a
-            >
-            <a href="../index.html" id="logOut" class="nav-link">Salir</a>
-            <a id="adminLink" class="nav-link">Login Admin</a>
-        <button id="cambiar-modo">Cambiar modo</button>
-      </nav>
-    </header>
 
-    <main id="main-carrito">
-      <h1> Carrito</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito de Compras</title>
+  <script src="../src/carrito.js" defer></script>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="icon" type="image/png" href="../img/mateIcon.png" />
+</head>
 
-      <section id="contenedor-carrito">
-        <ul id="lista-carrito"></ul>
+<body>
+  <header class="tienda-header">
+    <div class="logo-container">
+      <img src="../img/logo.png" alt="Logo Mates 132" class="logo">
+    </div>
+    <nav>
+      <a href="../pages/productos.html" id="volver-a-productos" class="nav-link">Volver a productos</a>
+      <a href="../index.html" id="logOut" class="nav-link">Salir</a>
+      <a id="adminLink" class="nav-link">Login Admin</a>
+      <button id="cambiar-modo">Cambiar modo</button>
+    </nav>
+  </header>
 
-        <div id="carrito-pie-de-pagina"></div>
-      </section>
-    </main>
-  </body>
+  <main id="main-carrito">
+    <h1> Carrito</h1>
+
+    <section id="contenedor-carrito">
+      <ul id="lista-carrito"></ul>
+
+      <div id="carrito-pie-de-pagina"></div>
+    </section>
+  </main>
+  <footer class="main-footer">
+        <div class="footer-content">
+            <p>Desarrollado por:</p>
+            <div class="footer-developers">
+                <a href="https://github.com/EmiNahuelGarcia" target="_blank" class="developer-link">Garcia Emiliano</a>
+                <a href="https://github.com/GricelDiazZabala" target="_blank" class="developer-link">Zabala Gricel</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
 </html>

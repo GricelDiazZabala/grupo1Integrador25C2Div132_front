@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="../src/main.js" defer></script>
 </head>
+
 <body>
-    
+
     <header class="tienda-header">
-        <!-- Logo agregado -->
+
         <div class="logo-container">
             <img src="../img/logo.png" alt="Logo Mates 132" class="logo">
         </div>
@@ -23,10 +25,13 @@
                 <li>
                     <a href="../index.html" id="logOut" class="nav-link">Salir</a>
                     <a id="adminLink" class="nav-link">Login Admin</a>
+                    <button id="cambiar-modo">Cambiar modo</button>
                 </li>
+                
             </ul>
-            <button id="cambiar-modo">Cambiar modo</button>
+            
         </nav>
+        
     </header>
 
     <main class="tienda-main">
@@ -34,13 +39,13 @@
             <h1>ARMA TU PEDIDO</h1>
             <p class="subtitle">Selecciona tus productos</p>
         </div>
-        
+
         <div class="filters-container">
             <button class="filter-btn active" id="todos">Todos</button>
             <button class="filter-btn" id="mate">Mates</button>
             <button class="filter-btn" id="termo">Termos</button>
-            
-            
+
+
             <div class="ordenar-buttons">
                 <button id="ordenar-por-nombre" class="order-btn">Ordenar A-Z</button>
                 <button id="ordenar-por-precio" class="order-btn">Ordenar por Precio</button>
@@ -61,6 +66,8 @@
             Ver Carrito / Pagar <span id="carrito-counter" class="carrito-counter">0</span>
         </a>
     </footer>
+    
 
 </body>
+
 </html>
