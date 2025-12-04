@@ -1,6 +1,8 @@
+//constante de configuracion
+const BACKEND_BASE_URL = "http://localhost:3300";
+
 // boton para cambiar de modo oscuro y claro
 const btnTema = document.getElementById('cambiar-modo');
-const BACKEND_BASE_URL = "http://localhost:3300";
 const linkBack = document.getElementById("adminLink");
 linkBack.href = BACKEND_BASE_URL;
 
@@ -29,6 +31,7 @@ const botonConfirmarCompra = document.getElementById("boton-confirmar-compra");
 const carritoPieDePagina = document.getElementById("carrito-pie-de-pagina")
 
 //usamos reduce para calcular el precio total a pagar, sumando los precios de productos individuales
+//Return : la suma del precio y la cantida de cada producto
 function calcularPrecioTotal() {
   if (carrito.length === 0) {
     return 0;
@@ -39,6 +42,7 @@ function calcularPrecioTotal() {
 }
 
 //mostramos el carrito con un innerHTML
+//muestra los productos, subtotales y las acciones que se pueden realizar
 function mostrarCarrito() {
   console.log("Contenido del carrito:", carrito);
   if (carrito.length === 0) {
@@ -102,6 +106,7 @@ function mostrarCarrito() {
 }
 
 //funciones para aumentar o disminuir cantidad de los productos del carrito
+//Parametro : indice del producto en el Array del carrito
 //automáticamente se actualiza
 function aumentarCantidad(indice) {
   if (carrito[indice]) {
@@ -123,7 +128,8 @@ function disminuirCantidad(indice) {
     mostrarCarrito();
   }
 }
-//funcion para eliminar todos los productos de un mismo tipo del carrito
+//funcion para eliminar todos los productos de un mismo tipo del carrito, con confirmacion previa
+//Parametro : indice del producto en el Array del carrito
 function eliminarElemento(indice) {
   if (
     confirm("¿Estás seguro de que querés eliminar este producto del carrito?")
@@ -144,6 +150,13 @@ function vaciarCarrito() {
 }
 
 //para confimar la compra, hay varias validaciones
+/**
+  Confirma la compra actual.
+  Valida que el carrito no esté vacío.
+  Envía datos de la venta al backend (API /sales).
+  Guarda la factura en sessionStorage si existe resultado.factura.
+  Vacía el carrito y redirige a ticket.html.
+ */
 const confirmarCompra = async () => {
   if (!confirm("Deseas confirmar la compra?")) {
     return
@@ -225,6 +238,7 @@ function cargarTemaGuardado() {
 }
 //============================
 
+//funcion inicializadora
 function initCarrito() {
   cargarTemaGuardado();
   cargarCarritoSessionStorage();

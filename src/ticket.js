@@ -1,5 +1,12 @@
 const btnTema = document.getElementById('cambiar-modo');
 
+
+/**
+    Renderiza el ticket de compra en el DOM.
+    Obtiene los datos de la ultima venta desde sessionStorage.
+    Genera HTML con cliente, fecha, productos y total.
+    Muestra un mensaje si no hay datos.
+ */
 function cargarTicket() {
     const datosVentaJSON = sessionStorage.getItem("ultimaVenta");
     const contenedorTicket = document.getElementById("contenedor-ticket");
@@ -63,6 +70,11 @@ function cargarTicket() {
 
 }
 
+/**
+    Reinicia el sistema:
+    Limpia sessionStorage y localStorage.
+    Redirige al index.html.
+ */
 function reiniciarSistema() {
 
     sessionStorage.clear();
@@ -71,6 +83,10 @@ function reiniciarSistema() {
     window.location.href = '../index.html';
 }
 
+/**
+    Aplica un tema (claro u oscuro) y lo guarda en localStorage.
+    Parametro : tema - Nombre del tema ('claro' u 'oscuro').
+ */
 const aplicarTema = (tema) => {
     document.documentElement.setAttribute('data-theme', tema);
     localStorage.setItem('tema', tema);
@@ -96,6 +112,7 @@ function cargarTemaGuardado() {
     }
 }
 
+//funcion inicializadora
 async function init() {
     cargarTemaGuardado();
     cargarTicket(); 

@@ -2,7 +2,12 @@
 const btnTema = document.getElementById('cambiar-modo');
 const welcomeForm = document.getElementById('welcome-form');
 
-//no se puede avanzar sin ingresar un nombre
+/**
+    Maneja el envío del formulario de bienvenida.
+    Valida que se ingrese un nombre.
+    Guarda el nombre en sessionStorage.
+    Redirige a productos.html.
+ */
 welcomeForm.addEventListener('submit', (event) => {
 
     event.preventDefault();
@@ -20,6 +25,7 @@ welcomeForm.addEventListener('submit', (event) => {
 
 //==============================================================
 //Funciones para cambiar de tema oscuro/claro
+//Parametro : el nombre del tema ("claro" u "oscuro")
 const aplicarTema = (tema) => {
     document.documentElement.setAttribute('data-theme', tema);
     localStorage.setItem('tema', tema);
@@ -46,6 +52,7 @@ function cargarTemaGuardado() {
 }
 //==============================================================
 
+//funcion inicializadora
 async function init() {
     cargarTemaGuardado();
 }

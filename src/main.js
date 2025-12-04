@@ -1,4 +1,4 @@
-
+// Constantes de configuración para URLs base del backend y recursos
 const API_BASE_URL = "http://localhost:3300/api/products";
 const imgUrl = "http://localhost:3300";
 const BACKEND_BASE_URL = "http://localhost:3300";
@@ -54,7 +54,8 @@ function cargarCarritoSessionStorage() {
   }
 }
 
-//funcion para obtener los productos desde la API
+//funcion para obtener los productos desde la API, maneja errores si no lo consigue
+
 async function obtenerProductos() {
   try {
     const respuesta = await fetch(API_BASE_URL);
@@ -121,6 +122,11 @@ filterButtons.forEach(button => {
 });
 
 
+/**
+  Agrega un producto al carrito según su ID.
+  Parametro : ID del producto a agregar.
+  Actualiza el carrito en sessionStorage y el contador en la interfaz.
+ */
 function agregarACarrito(id){
     const prodSeleccionado = todosLosProductos.find(p => p.id === id);
     if(prodSeleccionado){
@@ -159,6 +165,7 @@ ordenarNombreBtn.addEventListener('click', ordenarPorNombre);
 ordenarPrecioBtn.addEventListener('click', ordenarPrecio);
 
 
+//funciones para ordenar los productos por precio y alfabeticamente
 function ordenarPrecio() {
   const productosOrdenados = [...productosMostrados];
   productosOrdenados.sort((a, b) => a.precio_producto - b.precio_producto);
@@ -171,6 +178,10 @@ function ordenarPorNombre(){
   mostrarProductos(productosOrdenados);
 }
 
+/**
+  Aplica un tema (claro u oscuro) y lo guarda en localStorage.
+  Parametro : tema - Nombre del tema ('claro' u 'oscuro').
+ */
 const aplicarTema = (tema) => {
     document.documentElement.setAttribute('data-theme', tema);
     localStorage.setItem('tema', tema);
@@ -196,6 +207,7 @@ function cargarTemaGuardado() {
     }
 }
 
+// funcion inicializadora
 async function init() {
   cargarTemaGuardado();
   mostrarBienvenida();
