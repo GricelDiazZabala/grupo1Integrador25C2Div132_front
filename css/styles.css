@@ -7,6 +7,7 @@
   --border-color: #0077B6;
   --accent-color: #0096C7;
   --accent-hover: #00B4D8;
+  --texto-contraste: #0d0f6f;
 }
 
 [data-theme='oscuro'] {
@@ -16,7 +17,8 @@
   --text-secondary: #a0a0a0;
   --border-color: #76c848;
   --accent-color: #76c848;
-  --accent-hover: #5da335; 
+  --accent-hover: #5da335;
+  --texto-contraste: #0a722d;
 }
 
 
@@ -157,7 +159,7 @@ body {
   background-color: #c6c4cd;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: var(--accent-color);
+  color: var(--texto-contraste);
   font-size: 1rem;
   transition: border-color 0.3s ease;
 }
@@ -169,7 +171,7 @@ body {
 }
 
 .form-login input[type="text"]::placeholder {
-  color: var(--text-secondary);
+  color: var(--texto-contraste);
 }
 
 /* boton del login */
