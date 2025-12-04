@@ -28,3 +28,24 @@ Luego de agregar al carrito avanzamos al carrito:
 Y finalmente podemos imprimir un ticket de nuestra compra:
 
 ![ticket](img/ticket.jpg)
+
+## Estructura del proyecto:
+
+### [index.html](index.html) — página de login
+### [css/styles.css](css/styles.css) — estilos y temas (claro/oscuro)
+### [img/](img/) — imágenes y recursos como logo
+### [pages/productos.html](pages/productos.html) — vista de productos
+### [pages/carrito.html](pages/carrito.html) — vista del carrito
+### [pages/ticket.html](pages/ticket.html) — vista del ticket imprimible
+### [src/main.js](src/main.js) — lógica principal (modo, renderizado dinamico, filtros)
+### [src/login.js](src/login.js) — lógica de login 
+### [src/carrito.js](src/carrito.js) — lógica del carrito (agregar, eliminar, vaciar)
+### [src/ticket.js](src/ticket.js) — generación dinamica y formato para impresion del ticket
+
+```
+📂C:.
+ ├───📂css
+ ├───📂img
+ ├───📂pages
+ └───📂src
+```
