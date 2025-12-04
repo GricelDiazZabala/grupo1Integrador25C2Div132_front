@@ -1,7 +1,8 @@
+//ELEMENTOS DOM
 const btnTema = document.getElementById('cambiar-modo');
+const welcomeForm = document.getElementById('welcome-form');
 
-let welcomeForm = document.getElementById('welcome-form');
-
+//no se puede avanzar sin ingresar un nombre
 welcomeForm.addEventListener('submit', (event) => {
 
     event.preventDefault();
@@ -17,6 +18,8 @@ welcomeForm.addEventListener('submit', (event) => {
 
 });
 
+//==============================================================
+//Funciones para cambiar de tema oscuro/claro
 const aplicarTema = (tema) => {
     document.documentElement.setAttribute('data-theme', tema);
     localStorage.setItem('tema', tema);
@@ -41,6 +44,7 @@ function cargarTemaGuardado() {
         aplicarTema('claro');
     }
 }
+//==============================================================
 
 async function init() {
     cargarTemaGuardado();

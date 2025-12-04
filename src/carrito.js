@@ -1,14 +1,17 @@
+// boton para cambiar de modo oscuro y claro
 const btnTema = document.getElementById('cambiar-modo');
 const BACKEND_BASE_URL = "http://localhost:3300";
 const linkBack = document.getElementById("adminLink");
 linkBack.href = BACKEND_BASE_URL;
 
+//declaramos un carrito vacío (array) para empezar
 let carrito = [];
 
+//el carrito se guarda en sessionStorage, no en local
 function guardarCarritoSessionStorage() {
   sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
-
+//si ya hay un carrito, lo carga
 function cargarCarritoSessionStorage() {
   const carritoStorage = sessionStorage.getItem("carrito");
   if (carritoStorage) {
@@ -16,6 +19,7 @@ function cargarCarritoSessionStorage() {
   }
 }
 
+//ELEMENTOS DOM
 const contenedorCarrito = document.getElementById("contenedor-carrito");
 const listaCarrito = document.getElementById("lista-carrito");
 const carritoVacio = document.getElementById("carrito-vacio");
@@ -24,8 +28,7 @@ const botonVaciarCarrito = document.getElementById("boton-vaciar-carrito");
 const botonConfirmarCompra = document.getElementById("boton-confirmar-compra");
 const carritoPieDePagina = document.getElementById("carrito-pie-de-pagina")
 
-
-
+//usamos reduce para calcular el precio total a pagar, sumando los precios de productos individuales
 function calcularPrecioTotal() {
   if (carrito.length === 0) {
     return 0;
@@ -35,6 +38,7 @@ function calcularPrecioTotal() {
   }, 0);
 }
 
+//mostramos el carrito con un innerHTML
 function mostrarCarrito() {
   console.log("Contenido del carrito:", carrito);
   if (carrito.length === 0) {
@@ -97,9 +101,8 @@ function mostrarCarrito() {
   `;
 }
 
-
-
-
+//funciones para aumentar o disminuir cantidad de los productos del carrito
+//automáticamente se actualiza
 function aumentarCantidad(indice) {
   if (carrito[indice]) {
     carrito[indice].cantidad += 1;
@@ -120,7 +123,7 @@ function disminuirCantidad(indice) {
     mostrarCarrito();
   }
 }
-
+//funcion para eliminar todos los productos de un mismo tipo del carrito
 function eliminarElemento(indice) {
   if (
     confirm("¿Estás seguro de que querés eliminar este producto del carrito?")
@@ -131,6 +134,7 @@ function eliminarElemento(indice) {
   }
 }
 
+// vaciar el carrito sólo declara un largo (length) de carrito igual a 0
 function vaciarCarrito() {
   if (confirm("¿Estás seguro de que querés vaciar el carrito?")) {
     carrito.length = 0;
@@ -139,6 +143,7 @@ function vaciarCarrito() {
   }
 }
 
+//para confimar la compra, hay varias validaciones
 const confirmarCompra = async () => {
   if (!confirm("Deseas confirmar la compra?")) {
     return
@@ -191,6 +196,9 @@ const confirmarCompra = async () => {
   }
 };
 
+//==================================
+//funciones para el cambio de tema
+
 const aplicarTema = (tema) => {
   document.documentElement.setAttribute('data-theme', tema);
   localStorage.setItem('tema', tema);
@@ -215,6 +223,7 @@ function cargarTemaGuardado() {
     aplicarTema('claro');
   }
 }
+//============================
 
 function initCarrito() {
   cargarTemaGuardado();
